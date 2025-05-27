@@ -14,7 +14,7 @@ def caesar_encrypt():
     plain_text = data['plain_text']
     key = int(data['key'])
     encrypted_text = caesar_cipher.encryt_text(plain_text, key)
-    return jsonify({'decrypted_message': encrypted_text})
+    return jsonify({'encrypted_message': encrypted_text})
 
 @app.route("/api/caesar/decrypt", methods = ["POST"])
 def caesar_decrypt():
@@ -33,7 +33,7 @@ def vigenere_encrypt():
     plain_text = data['plain_text']
     key = data['key']
     encrypted_text = vigenere_cipher.vigenere_encrypt(plain_text, key)
-    return jsonify({'encrypted_text': encrypted_text})
+    return jsonify({'encrypted_message': encrypted_text})
 
 @app.route('/api/vigenere/decrypt', methods=['POST'])
 def vigenere_decrypt():
@@ -50,16 +50,16 @@ railfence_cipher = RailFenceCipher()
 def railfence_encrypt():
     data = request.json
     plain_text = data['plain_text']
-    key = data['key']
-    encrypted_text = vigenere_cipher.railfence_encrypt(plain_text, key)
+    key = int(data['key'])
+    encrypted_text = railfence_cipher.rail_fence_encrypt(plain_text, key)
     return jsonify({'encrypted_text': encrypted_text})
 
 @app.route('/api/railfence/decrypt', methods=['POST'])
 def railfence_decrypt():
     data = request.json
     cipher_text = data['cipher_text']
-    key = data['key']
-    decrypted_text = vigenere_cipher.railfence_decrypt(cipher_text, key)
+    key = int(data['key'])
+    decrypted_text = railfence_cipher.rail_fence_decrypt(cipher_text, key)
     return jsonify({'decrypted_message': decrypted_text}) 
 
 #PLAYFAIR CIPHER ALGORITHM
